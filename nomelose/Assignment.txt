@@ -1,0 +1,8 @@
+Read Chapter 6 and then answer these questions:
+
+Think of a problem not identified in the book and explain in a detailed fashion how you would apply CSP to solve it.
+How many solutions are there for the map-coloring problem in Figure 6.1Links to an external site.? How many solutions if four colors are allowed? Two colors? 
+Explain why it is a good heuristic to choose the variable that is most constrained but the value that is least constraining in a CSP search.
+In addition, implement Sudoku using the python-constraint package to implement the approaches explained in the chapter. Implement your solution in a Jupyter notebook and submit the resulting analysis in both html and ipynb format.
+
+Please submit a single PDF containing answers to all of the above (except for the Jupyter notebook files).

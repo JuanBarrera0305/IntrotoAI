@@ -1,0 +1,24 @@
+Read Chapter 7 and then answer these questions:
+
+Given the following, can you prove that the unicorn is mythical? How about magical? Horned? Note: If the unicorn is mythical, then it is immortal, but if it is not mythical, then it is a mortal mammal. If the unicorn is either immortal or a mammal, then it is horned. The unicorn is magical if it is horned.
+P1. Mythical (M) ⇒ Immortal (I)
+P2. ¬Mythical (M)⇒ ¬Immortal(I) ∧ Mammal (A)
+P3. Immortal(I) ∨ Mammal (A)⇒ Horned (H)
+P4. Horned(H) ⇒ Magical(G)
+Which of the following are correct? You are allowed to use a Python program to answer these.
+False⊨True
+True⊨False
+(A∧B)⊨(A⇔B)
+A⇔B⊨A∨B
+A⇔B⊨¬A∨B
+(A∧B)⇒C⊨(A⇒C)∨(B⇒C)
+(C∨(¬A∧¬B))≡((A⇒C)∧(B⇒C))
+(A∨B)∧(¬C∨¬D∨E)⊨(A∨B)
+(A∨B)∧(¬C∨¬D∨E)⊨(A∨B)∧(¬D∨E)
+(𝐴∨𝐵)∧¬(𝐴⇒𝐵) is satisfiable.
+(𝐴⇔𝐵)∧(¬𝐴∨𝐵) is satisfiable.
+(𝐴⇔𝐵)⇔𝐶 has the same number of models as (𝐴⇔𝐵) for any fixed set of proposition symbols that includes 𝐴, 𝐵, 𝐶.
+Find a problem from your professional or personal life that can be solved through logic. Explain what the problem is and how you would approach to solve it and include a level of detail similar to the wumpus world. You do not have to actually solve the problem but explain how it could be solved.
+In addition, implement the approach in Sections 7.4.2, 7.4.3, and 7.4.4 in a Python program. You should generate similar output as the table in Figure 7.9 by implementing an approach similar to Figure 7.10. After deducing there is no pit in [1,2], deduce another piece of information by updating the database. You can look back to the example earlier in the Chapter for additional ideas, but you should add R6, R7, ... and then infer something new. For example, based on additional observations you can deduce that the wumpus must be in [1,3]. Implement your solution in a Jupyter notebook and submit the resulting analysis in both html and ipynb format.
+
+Please submit a single PDF containing answers to all of the above (except for the Jupyter notebook files).

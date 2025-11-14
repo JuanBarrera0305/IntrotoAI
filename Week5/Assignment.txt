@@ -1,0 +1,8 @@
+Read Chapter 5 and then answer these questions:
+
+Discuss how well the standard approach to game playing would apply to games such as tennis, pool, and croquet, which take place in a continuous physical state space.
+Describe how the minimax and alpha–beta algorithms change for two-player, non-zero-sum games in which each player has a distinct utility function and both utility functions are known to both players. If there are no constraints on the two terminal utilities, is it possible for any node to be pruned by alpha–beta?
+Suppose you have a chess program that can evaluate 5 million nodes per second. Decide on a compact representation of a game state for storage in a transposition table. How many entries can you fit in a 1-gigabyte in-memory table? Will that be enough for the three minutes of search allocated for one move?
+In addition, implement a computer player for the tic-tac-toe game using information from the book. The other player should be human and your program should ask for moves. Implement your solution in a Jupyter notebook and submit the resulting analysis in both html and ipynb format.
+
+Please submit a single PDF containing answers to all of the above (except for the Jupyter notebook files).
