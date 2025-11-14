@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Module4Assignment(Part A)</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>sudoku</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7515,50 +7515,11 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1">#Given the following, can you prove that the unicorn is mythical? How about magical? Horned? Note: If the unicorn is mythical, then it is immortal, but if it is not mythical, then it is a mortal mammal. If the unicorn is either immortal or a mammal, then it is horned. The unicorn is magical if it is horned.</span>
-<span class="c1">#P1. Mythical (M) ⇒ Immortal (I)</span>
-<span class="c1">#P2. ¬Mythical (M)⇒ ¬Immortal(I) ∧ Mammal (A)</span>
-<span class="c1">#P3. Immortal(I) ∨ Mammal (A)⇒ Horned (H)</span>
-<span class="c1">#P4. Horned(H) ⇒ Magical(G)</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
-
-<span class="c1"># Proposition symbols: Mythical (M), Immortal (I), Mammal (A), Horned (H), Magical (G)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">P1</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="ow">not</span> <span class="n">M</span><span class="p">)</span> <span class="ow">or</span> <span class="n">I</span>   <span class="c1"># M ⇒ I</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">P2</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">M</span> <span class="ow">or</span> <span class="p">((</span><span class="ow">not</span> <span class="n">I</span><span class="p">)</span> <span class="ow">and</span> <span class="n">A</span><span class="p">)</span>  <span class="c1"># ¬M ⇒ (¬I ∧ A)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">P3</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="ow">not</span> <span class="p">(</span><span class="n">I</span> <span class="ow">or</span> <span class="n">A</span><span class="p">))</span> <span class="ow">or</span> <span class="n">H</span>   <span class="c1"># (I ∨ A) ⇒ H</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">P4</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="ow">not</span> <span class="n">H</span><span class="p">)</span> <span class="ow">or</span> <span class="n">G</span>          <span class="c1"># H ⇒ G</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">M</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">values</span>
-    <span class="k">if</span> <span class="n">P1</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span> <span class="ow">and</span> <span class="n">P2</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span> <span class="ow">and</span> <span class="n">P3</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span> <span class="ow">and</span> <span class="n">P4</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
-        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'M'</span><span class="p">:</span> <span class="n">M</span><span class="p">,</span> <span class="s1">'I'</span><span class="p">:</span> <span class="n">I</span><span class="p">,</span> <span class="s1">'A'</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span> <span class="s1">'H'</span><span class="p">:</span> <span class="n">H</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">:</span> <span class="n">G</span><span class="p">})</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Satisfying models:"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-
-<span class="c1"># Conclusions</span>
-<span class="n">is_mythical</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'M'</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">)</span>
-<span class="n">is_horned</span>   <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'H'</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">)</span>
-<span class="n">is_magical</span>  <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'G'</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Conclusions:"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unicorn is mythical? </span><span class="si">{</span><span class="s1">'Yes'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_mythical</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'No'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unicorn is horned? </span><span class="si">{</span><span class="s1">'Yes'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_horned</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'No'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unicorn is magical? </span><span class="si">{</span><span class="s1">'Yes'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_magical</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'No'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># If not already installed, uncomment and run this cell</span>
+<span class="o">%</span><span class="k">pip</span> install python-constraint
 </pre></div>
 </div>
 </div>
@@ -7571,16 +7532,89 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Satisfying models:
-{'M': True, 'I': True, 'A': True, 'H': True, 'G': True}
-{'M': True, 'I': True, 'A': False, 'H': True, 'G': True}
-{'M': False, 'I': False, 'A': True, 'H': True, 'G': True}
+<pre>Requirement already satisfied: python-constraint in /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages (1.4.0)
 
-Conclusions:
-Unicorn is mythical? No
-Unicorn is horned? Yes
-Unicorn is magical? Yes
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">25.0.1</span> -&gt; <span class="ansi-green-fg">25.2</span>
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip3 install --upgrade pip</span>
+Note: you may need to restart the kernel to use updated packages.
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">constraint</span><span class="w"> </span><span class="kn">import</span> <span class="n">Problem</span><span class="p">,</span> <span class="n">AllDifferentConstraint</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sudoku_solver</span><span class="p">(</span><span class="n">puzzle</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Solves a 9x9 Sudoku puzzle using python-constraint.</span>
+<span class="sd">    Returns a random valid solution by shuffling domains.</span>
+<span class="sd">    """</span>
+    <span class="n">problem</span> <span class="o">=</span> <span class="n">Problem</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">domain</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+                <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>  <span class="c1"># Shuffle to vary solution path</span>
+                <span class="n">problem</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">problem</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="p">[</span><span class="n">puzzle</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]])</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="n">problem</span><span class="o">.</span><span class="n">addConstraint</span><span class="p">(</span><span class="n">AllDifferentConstraint</span><span class="p">(),</span> <span class="p">[(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)])</span>
+
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="n">problem</span><span class="o">.</span><span class="n">addConstraint</span><span class="p">(</span><span class="n">AllDifferentConstraint</span><span class="p">(),</span> <span class="p">[(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)])</span>
+
+    <span class="k">for</span> <span class="n">box_row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">box_col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">cells</span> <span class="o">=</span> <span class="p">[(</span><span class="n">box_row</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">r</span><span class="p">,</span> <span class="n">box_col</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+            <span class="n">problem</span><span class="o">.</span><span class="n">addConstraint</span><span class="p">(</span><span class="n">AllDifferentConstraint</span><span class="p">(),</span> <span class="n">cells</span><span class="p">)</span>
+
+    <span class="n">solution_iter</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">getSolutionIter</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">solution</span> <span class="ow">in</span> <span class="n">solution_iter</span><span class="p">:</span>
+        <span class="n">solved_grid</span> <span class="o">=</span> <span class="p">[[</span><span class="n">solution</span><span class="p">[(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">solved_grid</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">grid</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">row</span><span class="p">))</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -7590,48 +7624,27 @@ Unicorn is magical? Yes
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1">#Which of the following are correct? You are allowed to use a Python program to answer these.</span>
-<span class="c1">#False⊨True</span>
-<span class="c1">#True⊨False</span>
-<span class="c1">#(A∧B)⊨(A⇔B)</span>
-<span class="c1">#A⇔B⊨A∨B</span>
-<span class="c1">#A⇔B⊨¬A∨B</span>
-<span class="c1">#(A∧B)⇒C⊨(A⇒C)∨(B⇒C)</span>
-<span class="c1">#(C∨(¬A∧¬B))≡((A⇒C)∧(B⇒C))</span>
-<span class="c1">#(A∨B)∧(¬C∨¬D∨E)⊨(A∨B)</span>
-<span class="c1">#(A∨B)∧(¬C∨¬D∨E)⊨(A∨B)∧(¬D∨E)</span>
-<span class="c1">#(𝐴∨𝐵)∧¬(𝐴⇒𝐵) is satisfiable.</span>
-<span class="c1">#(𝐴⇔𝐵)∧(¬𝐴∨𝐵) is satisfiable.</span>
-<span class="c1">#(𝐴⇔𝐵)⇔𝐶 has the same number of models as (𝐴⇔𝐵) for any fixed set of proposition symbols that includes 𝐴, 𝐵, 𝐶.</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">puzzle</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># One clue to reduce search space</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">]</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
-
-<span class="c1"># Utility: evaluate a formula under a given assignment</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">eval_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">assignment</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">formula</span><span class="p">(</span><span class="o">**</span><span class="n">assignment</span><span class="p">)</span>
-
-<span class="c1"># Check entailment: Premise ⊨ Conclusion</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">entails</span><span class="p">(</span><span class="n">premise</span><span class="p">,</span> <span class="n">conclusion</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)):</span>
-        <span class="n">assignment</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">eval_formula</span><span class="p">(</span><span class="n">premise</span><span class="p">,</span> <span class="n">assignment</span><span class="p">):</span>  <span class="c1"># premise true</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">eval_formula</span><span class="p">(</span><span class="n">conclusion</span><span class="p">,</span> <span class="n">assignment</span><span class="p">):</span>  <span class="c1"># but conclusion false</span>
-                <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">return</span> <span class="kc">True</span>
-
-<span class="c1"># Example formulas</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">premise1</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">E</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="k">return</span> <span class="kc">False</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">conclusion1</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">E</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="k">return</span> <span class="kc">True</span>
-
-<span class="c1"># Test: False ⊨ True</span>
-<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'A'</span><span class="p">,</span><span class="s1">'B'</span><span class="p">,</span><span class="s1">'C'</span><span class="p">,</span><span class="s1">'D'</span><span class="p">,</span><span class="s1">'E'</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"False ⊨ True ?"</span><span class="p">,</span> <span class="n">entails</span><span class="p">(</span><span class="n">premise1</span><span class="p">,</span> <span class="n">conclusion1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">))</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">sudoku_solver</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">solution</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Solved Sudoku:"</span><span class="p">)</span>
+    <span class="n">print_grid</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"No solution found."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7644,393 +7657,16 @@ Unicorn is magical? Yes
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>False ⊨ True ? True
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1">#Find a problem from your professional or personal life that can be solved through logic. Explain what the problem is and how you would approach to solve it and include a level of detail similar to the wumpus world. </span>
-<span class="c1">#You do not have to actually solve the problem but explain how it could be solved.</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
-
-<span class="c1"># Proposition symbols:</span>
-<span class="c1"># I: Indoor, O: Outdoor, S: Sprint, T: Tempo, R: Rest</span>
-<span class="c1"># N: Good Nutrition, L: Good Sleep</span>
-<span class="c1"># E: Endurance improves, X: Injury risk, P: Peak in May</span>
-
-<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'I'</span><span class="p">,</span> <span class="s1">'O'</span><span class="p">,</span> <span class="s1">'S'</span><span class="p">,</span> <span class="s1">'T'</span><span class="p">,</span> <span class="s1">'R'</span><span class="p">,</span> <span class="s1">'N'</span><span class="p">,</span> <span class="s1">'L'</span><span class="p">]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">implies</span><span class="p">(</span><span class="n">premise</span><span class="p">,</span> <span class="n">conclusion</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="ow">not</span> <span class="n">premise</span><span class="p">)</span> <span class="ow">or</span> <span class="n">conclusion</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">rule5</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">implies</span><span class="p">(</span><span class="n">I</span> <span class="ow">and</span> <span class="n">S</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">N</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">L</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">rule8</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">implies</span><span class="p">(</span><span class="n">T</span> <span class="ow">and</span> <span class="p">(</span><span class="n">N</span> <span class="ow">or</span> <span class="n">L</span><span class="p">),</span> <span class="n">E</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">rule9</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">O</span> <span class="ow">and</span> <span class="n">S</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">I</span> <span class="ow">and</span> <span class="n">S</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">N</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">L</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">R</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">rule10</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">implies</span><span class="p">(</span><span class="n">E</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">X</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)):</span>
-    <span class="n">I</span><span class="p">,</span> <span class="n">O</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">values</span>
-
-    <span class="c1"># Derived variables</span>
-    <span class="n">E</span> <span class="o">=</span> <span class="n">T</span> <span class="ow">and</span> <span class="p">(</span><span class="n">N</span> <span class="ow">or</span> <span class="n">L</span><span class="p">)</span>        <span class="c1"># Endurance improves if Tempo + (Nutrition or Sleep)</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">rule9</span><span class="p">(</span><span class="n">O</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>  <span class="c1"># Injury risk</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">E</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">X</span>           <span class="c1"># Peak if endurance improves and no injury</span>
-
-    <span class="c1"># Apply rules</span>
-    <span class="k">if</span> <span class="n">rule5</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span> <span class="ow">and</span> <span class="n">rule8</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span> <span class="ow">and</span> <span class="n">rule10</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s1">'I'</span><span class="p">:</span> <span class="n">I</span><span class="p">,</span> <span class="s1">'O'</span><span class="p">:</span> <span class="n">O</span><span class="p">,</span> <span class="s1">'S'</span><span class="p">:</span> <span class="n">S</span><span class="p">,</span> <span class="s1">'T'</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="s1">'R'</span><span class="p">:</span> <span class="n">R</span><span class="p">,</span>
-            <span class="s1">'N'</span><span class="p">:</span> <span class="n">N</span><span class="p">,</span> <span class="s1">'L'</span><span class="p">:</span> <span class="n">L</span><span class="p">,</span> <span class="s1">'E'</span><span class="p">:</span> <span class="n">E</span><span class="p">,</span> <span class="s1">'X'</span><span class="p">:</span> <span class="n">X</span><span class="p">,</span> <span class="s1">'P'</span><span class="p">:</span> <span class="n">P</span>
-        <span class="p">})</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Valid Training Scenarios:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Summary:"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total valid scenarios: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Scenarios where Juan peaks in May (P=True): </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="s1">'P'</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Scenarios with injury risk (X=True): </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="s1">'X'</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Scenarios with endurance gain (E=True): </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="s1">'E'</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Valid Training Scenarios:
-
-{'I': True, 'O': True, 'S': True, 'T': True, 'R': True, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': True, 'R': True, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': True, 'R': True, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': True, 'R': False, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': True, 'R': False, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': True, 'R': False, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': False, 'R': True, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': False, 'R': True, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': False, 'R': True, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': False, 'R': False, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': False, 'R': False, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': True, 'T': False, 'R': False, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': True, 'R': True, 'N': True, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': True, 'O': True, 'S': False, 'T': True, 'R': True, 'N': True, 'L': False, 'E': True, 'X': False, 'P': True}
-{'I': True, 'O': True, 'S': False, 'T': True, 'R': True, 'N': False, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': True, 'O': True, 'S': False, 'T': True, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': True, 'R': False, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': True, 'R': False, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': True, 'R': False, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': True, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': False, 'R': True, 'N': True, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': False, 'R': True, 'N': True, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': False, 'R': True, 'N': False, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': False, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': False, 'R': False, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': False, 'R': False, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': False, 'R': False, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': True, 'S': False, 'T': False, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': True, 'T': True, 'R': True, 'N': True, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': True, 'O': False, 'S': True, 'T': True, 'R': True, 'N': True, 'L': False, 'E': True, 'X': False, 'P': True}
-{'I': True, 'O': False, 'S': True, 'T': True, 'R': True, 'N': False, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': True, 'O': False, 'S': True, 'T': True, 'R': False, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': True, 'T': True, 'R': False, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': True, 'T': True, 'R': False, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': True, 'T': False, 'R': True, 'N': True, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': False, 'S': True, 'T': False, 'R': True, 'N': True, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': False, 'S': True, 'T': False, 'R': True, 'N': False, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': False, 'S': True, 'T': False, 'R': False, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': True, 'T': False, 'R': False, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': True, 'T': False, 'R': False, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': True, 'R': True, 'N': True, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': True, 'O': False, 'S': False, 'T': True, 'R': True, 'N': True, 'L': False, 'E': True, 'X': False, 'P': True}
-{'I': True, 'O': False, 'S': False, 'T': True, 'R': True, 'N': False, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': True, 'O': False, 'S': False, 'T': True, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': True, 'R': False, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': True, 'R': False, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': True, 'R': False, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': True, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': False, 'R': True, 'N': True, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': False, 'R': True, 'N': True, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': False, 'R': True, 'N': False, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': False, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': False, 'R': False, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': False, 'R': False, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': False, 'R': False, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': True, 'O': False, 'S': False, 'T': False, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': True, 'R': True, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': True, 'R': True, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': True, 'R': True, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': True, 'R': True, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': True, 'R': False, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': True, 'R': False, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': True, 'R': False, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': True, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': False, 'R': True, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': False, 'R': True, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': False, 'R': True, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': False, 'R': True, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': False, 'R': False, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': False, 'R': False, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': False, 'R': False, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': True, 'T': False, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': True, 'R': True, 'N': True, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': False, 'O': True, 'S': False, 'T': True, 'R': True, 'N': True, 'L': False, 'E': True, 'X': False, 'P': True}
-{'I': False, 'O': True, 'S': False, 'T': True, 'R': True, 'N': False, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': False, 'O': True, 'S': False, 'T': True, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': True, 'R': False, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': True, 'R': False, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': True, 'R': False, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': True, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': False, 'R': True, 'N': True, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': False, 'R': True, 'N': True, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': False, 'R': True, 'N': False, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': False, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': False, 'R': False, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': False, 'R': False, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': False, 'R': False, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': True, 'S': False, 'T': False, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': True, 'R': True, 'N': True, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': False, 'O': False, 'S': True, 'T': True, 'R': True, 'N': True, 'L': False, 'E': True, 'X': False, 'P': True}
-{'I': False, 'O': False, 'S': True, 'T': True, 'R': True, 'N': False, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': False, 'O': False, 'S': True, 'T': True, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': True, 'R': False, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': True, 'R': False, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': True, 'R': False, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': True, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': False, 'R': True, 'N': True, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': False, 'R': True, 'N': True, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': False, 'R': True, 'N': False, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': False, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': False, 'R': False, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': False, 'R': False, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': False, 'R': False, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': True, 'T': False, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': True, 'R': True, 'N': True, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': False, 'O': False, 'S': False, 'T': True, 'R': True, 'N': True, 'L': False, 'E': True, 'X': False, 'P': True}
-{'I': False, 'O': False, 'S': False, 'T': True, 'R': True, 'N': False, 'L': True, 'E': True, 'X': False, 'P': True}
-{'I': False, 'O': False, 'S': False, 'T': True, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': True, 'R': False, 'N': True, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': True, 'R': False, 'N': True, 'L': False, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': True, 'R': False, 'N': False, 'L': True, 'E': True, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': True, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': False, 'R': True, 'N': True, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': False, 'R': True, 'N': True, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': False, 'R': True, 'N': False, 'L': True, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': False, 'R': True, 'N': False, 'L': False, 'E': False, 'X': False, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': False, 'R': False, 'N': True, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': False, 'R': False, 'N': True, 'L': False, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': False, 'R': False, 'N': False, 'L': True, 'E': False, 'X': True, 'P': False}
-{'I': False, 'O': False, 'S': False, 'T': False, 'R': False, 'N': False, 'L': False, 'E': False, 'X': True, 'P': False}
-
-Summary:
-Total valid scenarios: 120
-Scenarios where Juan peaks in May (P=True): 18
-Scenarios with injury risk (X=True): 74
-Scenarios with endurance gain (E=True): 48
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1">#In addition, implement the approach in Sections 7.4.2, 7.4.3, and 7.4.4 in a Python program. You should generate similar output as the table in Figure 7.9 by implementing an approach </span>
-<span class="c1">#similar to Figure 7.10. After deducing there is no pit in [1,2], deduce another piece of information by updating the database. </span>
-<span class="c1">#You can look back to the example earlier in the Chapter for additional ideas, but you should add R6, R7, ... and then infer something new. For example, </span>
-<span class="c1">#based on additional observations you can deduce that the wumpus must be in [1,3]. Implement your solution in a Jupyter notebook and submit the resulting analysis in both html and ipynb format.</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
-
-<span class="c1"># Logical connectives</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">implies</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span> <span class="k">return</span> <span class="p">(</span><span class="ow">not</span> <span class="n">p</span><span class="p">)</span> <span class="ow">or</span> <span class="n">q</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">iff</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span> <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="ow">and</span> <span class="n">q</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="ow">not</span> <span class="n">p</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">q</span><span class="p">))</span>
-
-<span class="c1"># Base proposition symbols (Figure 7.9)</span>
-<span class="n">SYMBOLS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"B11"</span><span class="p">,</span> <span class="s2">"B21"</span><span class="p">,</span> <span class="s2">"P11"</span><span class="p">,</span> <span class="s2">"P12"</span><span class="p">,</span> <span class="s2">"P21"</span><span class="p">,</span> <span class="s2">"P22"</span><span class="p">,</span> <span class="s2">"P31"</span><span class="p">]</span>
-
-<span class="c1"># Knowledge base rules R1–R5</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R1</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="ow">not</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P11"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R2</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">iff</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">"B11"</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P12"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P21"</span><span class="p">])</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R3</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">iff</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">"B21"</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P11"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P22"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P31"</span><span class="p">])</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R4</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="ow">not</span> <span class="n">m</span><span class="p">[</span><span class="s2">"B11"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R5</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="s2">"B21"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">KB</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">R1</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R2</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R3</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R4</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R5</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-
-<span class="c1"># Truth-table enumeration</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">all_models</span><span class="p">(</span><span class="n">symbols</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)):</span>
-        <span class="k">yield</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">tt_entails</span><span class="p">(</span><span class="n">KB_func</span><span class="p">,</span> <span class="n">alpha_func</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">all_models</span><span class="p">(</span><span class="n">symbols</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">KB_func</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">alpha_func</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">return</span> <span class="kc">True</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">tt_models_where_KB_true</span><span class="p">(</span><span class="n">KB_func</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">all_models</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span> <span class="k">if</span> <span class="n">KB_func</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span>
-
-<span class="c1"># Deduce ¬P12</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">alpha_not_P12</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="ow">not</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P12"</span><span class="p">]</span>
-<span class="n">models_kb</span> <span class="o">=</span> <span class="n">tt_models_where_KB_true</span><span class="p">(</span><span class="n">KB</span><span class="p">,</span> <span class="n">SYMBOLS</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Models where KB is true: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">models_kb</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">models_kb</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Model </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"KB ⊨ ¬P12?"</span><span class="p">,</span> <span class="n">tt_entails</span><span class="p">(</span><span class="n">KB</span><span class="p">,</span> <span class="n">alpha_not_P12</span><span class="p">,</span> <span class="n">SYMBOLS</span><span class="p">))</span>
-
-<span class="c1"># Extended KB with R6–R9</span>
-<span class="n">EXT_SYMBOLS</span> <span class="o">=</span> <span class="n">SYMBOLS</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"B12"</span><span class="p">,</span> <span class="s2">"B22"</span><span class="p">,</span> <span class="s2">"P32"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R6</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">iff</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">"B12"</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P11"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P12"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P22"</span><span class="p">])</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R7</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="ow">not</span> <span class="n">m</span><span class="p">[</span><span class="s2">"B12"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R8</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">iff</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">"B22"</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P12"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P22"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">m</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"P32"</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R9</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="s2">"B22"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">KB_ext</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">KB</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R6</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R7</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R8</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R9</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-
-<span class="c1"># Deduce ¬P22 and P32</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">alpha_not_P22</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="ow">not</span> <span class="n">m</span><span class="p">[</span><span class="s2">"P22"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">alpha_P32</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"P32"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">models_ext</span> <span class="o">=</span> <span class="n">tt_models_where_KB_true</span><span class="p">(</span><span class="n">KB_ext</span><span class="p">,</span> <span class="n">EXT_SYMBOLS</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Extended KB valid models: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">models_ext</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"KB_ext ⊨ ¬P22?"</span><span class="p">,</span> <span class="n">tt_entails</span><span class="p">(</span><span class="n">KB_ext</span><span class="p">,</span> <span class="n">alpha_not_P22</span><span class="p">,</span> <span class="n">EXT_SYMBOLS</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"KB_ext ⊨ P32?"</span><span class="p">,</span> <span class="n">tt_entails</span><span class="p">(</span><span class="n">KB_ext</span><span class="p">,</span> <span class="n">alpha_P32</span><span class="p">,</span> <span class="n">EXT_SYMBOLS</span><span class="p">))</span>
-
-<span class="c1"># Optional: Wumpus deduction via stench rules</span>
-<span class="n">MORE_SYMBOLS</span> <span class="o">=</span> <span class="n">EXT_SYMBOLS</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"S21"</span><span class="p">,</span> <span class="s2">"S22"</span><span class="p">,</span> <span class="s2">"W11"</span><span class="p">,</span> <span class="s2">"W21"</span><span class="p">,</span> <span class="s2">"W31"</span><span class="p">,</span> <span class="s2">"W22"</span><span class="p">,</span> <span class="s2">"W12"</span><span class="p">,</span> <span class="s2">"W32"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">W</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"W</span><span class="si">{</span><span class="n">x</span><span class="si">}{</span><span class="n">y</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">S</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"S</span><span class="si">{</span><span class="n">x</span><span class="si">}{</span><span class="n">y</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">neighbors_W</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="p">[(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">stench_biconditional</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">iff</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="nb">any</span><span class="p">(</span><span class="n">W</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="ow">in</span> <span class="n">neighbors_W</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">R10</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">stench_biconditional</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R11</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">stench_biconditional</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R12</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="s2">"S21"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">R13</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="s2">"S22"</span><span class="p">]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">KB_wumpus</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">KB_ext</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R10</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R11</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R12</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">and</span> <span class="n">R13</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-
-<span class="c1"># Wumpus entailment</span>
-<span class="n">models_w</span> <span class="o">=</span> <span class="n">tt_models_where_KB_true</span><span class="p">(</span><span class="n">KB_wumpus</span><span class="p">,</span> <span class="n">MORE_SYMBOLS</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">KB_wumpus valid models: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">models_w</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">models_w</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"W11"</span><span class="p">,</span><span class="s2">"W21"</span><span class="p">,</span><span class="s2">"W31"</span><span class="p">,</span><span class="s2">"W22"</span><span class="p">,</span><span class="s2">"W12"</span><span class="p">,</span><span class="s2">"W32"</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span> <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Wumpus location frequencies:"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">entails_wumpus_at</span><span class="p">(</span><span class="n">loc</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">alpha</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">tt_entails</span><span class="p">(</span><span class="n">KB_wumpus</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">MORE_SYMBOLS</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"W11"</span><span class="p">,</span><span class="s2">"W21"</span><span class="p">,</span><span class="s2">"W31"</span><span class="p">,</span><span class="s2">"W22"</span><span class="p">,</span><span class="s2">"W12"</span><span class="p">,</span><span class="s2">"W32"</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"KB_wumpus ⊨ </span><span class="si">{</span><span class="n">loc</span><span class="si">}</span><span class="s2">? </span><span class="si">{</span><span class="n">entails_wumpus_at</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Models where KB is true: 3
-Model 1: {'B11': False, 'B21': True, 'P11': False, 'P12': False, 'P21': False, 'P22': False, 'P31': True}
-Model 2: {'B11': False, 'B21': True, 'P11': False, 'P12': False, 'P21': False, 'P22': True, 'P31': False}
-Model 3: {'B11': False, 'B21': True, 'P11': False, 'P12': False, 'P21': False, 'P22': True, 'P31': True}
-KB ⊨ ¬P12? True
-
-Extended KB valid models: 1
-KB_ext ⊨ ¬P22? True
-KB_ext ⊨ P32? True
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>
-KB_wumpus valid models: 49</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>
-Wumpus location frequencies:
-W22: 28
-W32: 28
-W12: 28
-W31: 28
-W21: 28
-W11: 28
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>KB_wumpus ⊨ W11? False
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>KB_wumpus ⊨ W21? False
-KB_wumpus ⊨ W31? False
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>KB_wumpus ⊨ W22? False
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>KB_wumpus ⊨ W12? False
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>KB_wumpus ⊨ W32? False
+<pre>Solved Sudoku:
+5 9 7 3 4 8 6 2 1
+3 6 4 5 2 1 9 7 8
+1 2 8 9 7 6 5 4 3
+7 1 2 6 9 3 4 8 5
+4 3 6 8 5 2 1 9 7
+9 8 5 4 1 7 3 6 2
+6 7 1 2 3 9 8 5 4
+2 5 9 1 8 4 7 3 6
+8 4 3 7 6 5 2 1 9
 </pre>
 </div>
 </div>

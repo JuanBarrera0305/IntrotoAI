@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Module4Assignment(Part B)</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>tic_tac_toe</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7510,7 +7510,7 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7518,164 +7518,40 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Use around 10 (logical) sentences to describe (a subset of) the university domain (analogous to the other domains introduced in Section 8.3), i.e., students, professors, courses, etc. What new knowledge can be deduced from these sentences?</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
-<span class="n">facts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">'Professor'</span><span class="p">,</span> <span class="s1">'profA'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'Course'</span><span class="p">,</span> <span class="s1">'CS101'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'Teaches'</span><span class="p">,</span> <span class="s1">'profA'</span><span class="p">,</span> <span class="s1">'CS101'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'DepartmentOf'</span><span class="p">,</span> <span class="s1">'CS101'</span><span class="p">,</span> <span class="s1">'CSDept'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'Student'</span><span class="p">,</span> <span class="s1">'alice'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'Enrolled'</span><span class="p">,</span> <span class="s1">'alice'</span><span class="p">,</span> <span class="s1">'CS101'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'Prerequisite'</span><span class="p">,</span> <span class="s1">'MATH100'</span><span class="p">,</span> <span class="s1">'CS101'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'RequiredForMajor'</span><span class="p">,</span> <span class="s1">'CS101'</span><span class="p">,</span> <span class="s1">'CSDept'</span><span class="p">)</span>
-<span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">board</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">" | "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">9</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">apply_axioms</span><span class="p">(</span><span class="n">facts</span><span class="p">):</span>
-    <span class="n">new_facts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">facts</span><span class="p">)</span>
-    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">while</span> <span class="n">changed</span><span class="p">:</span>
-        <span class="n">changed</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">current</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">new_facts</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_terminal</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">check_winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s2">"X"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">check_winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span><span class="n">cell</span> <span class="o">!=</span> <span class="s2">" "</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">board</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">row</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">current</span><span class="p">:</span>
-            <span class="n">pred</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span> <span class="o">=</span> <span class="n">f</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
+    <span class="n">win_states</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>
+        <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>
+        <span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>
+        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)],</span>
+        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)],</span>
+        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>
+        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>
+        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="n">player</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">win_states</span><span class="p">)</span>
 
-            <span class="c1"># Logic 1 &amp; 2</span>
-            <span class="c1"># If someone is a student, then they are also considered a person.</span>
-            <span class="c1"># If someone is a professor, then they are also considered a person.</span>
-            <span class="k">if</span> <span class="n">pred</span> <span class="o">==</span> <span class="s1">'Student'</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">'Person'</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'Person'</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-                <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">if</span> <span class="n">pred</span> <span class="o">==</span> <span class="s1">'Professor'</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">'Person'</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'Person'</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-                <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">utility</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">check_winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s2">"X"</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">check_winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
 
-
-
-            <span class="c1"># Logic 3</span>
-            <span class="c1"># If someone teaches a course, then they must be a professor and the thing they teach must be a course.</span>
-            <span class="k">if</span> <span class="n">pred</span> <span class="o">==</span> <span class="s1">'Teaches'</span><span class="p">:</span>
-                <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">args</span>
-                <span class="k">if</span> <span class="p">(</span><span class="s1">'Professor'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                    <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'Professor'</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
-                    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">if</span> <span class="p">(</span><span class="s1">'Course'</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                    <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'Course'</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-                    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-
-            <span class="c1"># Logic 4</span>
-            <span class="c1"># If someone is enrolled in a course, then they must be a student and the thing they’re enrolled in must be a course.</span>
-            <span class="k">if</span> <span class="n">pred</span> <span class="o">==</span> <span class="s1">'Enrolled'</span><span class="p">:</span>
-                <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">args</span>
-                <span class="k">if</span> <span class="p">(</span><span class="s1">'Student'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                    <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'Student'</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
-                    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">if</span> <span class="p">(</span><span class="s1">'Course'</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                    <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'Course'</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-                    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="c1"># Logic 5</span>
-        <span class="c1"># If a student is enrolled in a course and a professor teaches that same course, then the student is taking the course from that professor.</span>
-        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Enrolled'</span><span class="p">]:</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Teaches'</span> <span class="ow">and</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">]:</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">if</span> <span class="p">(</span><span class="s1">'TakesCourseFrom'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                    <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'TakesCourseFrom'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
-                    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="c1"># Logic 6</span>
-        <span class="c1"># If a professor teaches a course and that course belongs to a department, then the professor works in that department.</span>
-        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Teaches'</span><span class="p">]:</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'DepartmentOf'</span> <span class="ow">and</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">]:</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-                <span class="k">if</span> <span class="p">(</span><span class="s1">'WorksIn'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                    <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'WorksIn'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
-                    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="c1"># Logic 7</span>
-        <span class="c1"># If a student is enrolled in a course, and that course belongs to a department and is required for a major in that department, then the student majors in that department.</span>
-        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Enrolled'</span><span class="p">]:</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'DepartmentOf'</span> <span class="ow">and</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">]:</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-                <span class="k">if</span> <span class="p">(</span><span class="s1">'RequiredForMajor'</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="s1">'MajorsIn'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                        <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'MajorsIn'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
-                        <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="c1"># Logic 8</span>
-        <span class="c1">#  If a professor teaches a course and a student is enrolled in that same course, then the professor and student interact.</span>
-        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Teaches'</span><span class="p">]:</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Enrolled'</span> <span class="ow">and</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">z</span><span class="p">]:</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">if</span> <span class="p">(</span><span class="s1">'InteractsWith'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                    <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'InteractsWith'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-                    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="c1"># Logic 9</span>
-        <span class="c1">#  If one course is a prerequisite for another, then both must be valid courses.</span>
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Prerequisite'</span><span class="p">]:</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="k">if</span> <span class="p">(</span><span class="s1">'Course'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'Course'</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
-                <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">if</span> <span class="p">(</span><span class="s1">'Course'</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'Course'</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-                <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="c1"># Axiom 10</span>
-        <span class="c1"># If a student is enrolled in a course and another course is a prerequisite for it, then the student must have satisfied the requirement for that prerequisite.</span>
-        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Enrolled'</span><span class="p">]:</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">new_facts</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Prerequisite'</span> <span class="ow">and</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">]:</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">if</span> <span class="p">(</span><span class="s1">'HasRequired'</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_facts</span><span class="p">:</span>
-                    <span class="n">new_facts</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="s1">'HasRequired'</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
-                    <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="k">return</span> <span class="n">new_facts</span>
-
-<span class="c1"># Run deduction</span>
-<span class="n">deduced</span> <span class="o">=</span> <span class="n">apply_axioms</span><span class="p">(</span><span class="n">facts</span><span class="p">)</span>
-
-<span class="c1"># Print results</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Deduced Facts:"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deduced</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_legal_moves</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="s2">" "</span><span class="p">]</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Deduced Facts:
-Course(CS101)
-Course(MATH100)
-DepartmentOf(CS101, CSDept)
-Enrolled(alice, CS101)
-HasRequired(MATH100, alice)
-InteractsWith(profA, alice)
-MajorsIn(alice, CSDept)
-Person(alice)
-Person(profA)
-Prerequisite(MATH100, CS101)
-Professor(profA)
-RequiredForMajor(CS101, CSDept)
-Student(alice)
-TakesCourseFrom(alice, profA)
-Teaches(profA, CS101)
-WorksIn(profA, CSDept)
-</pre>
 </div>
 </div>
 </div>
@@ -7688,13 +7564,38 @@ WorksIn(profA, CSDept)
 <div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Reflection</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">minimax</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">is_maximizing</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">is_terminal</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">utility</span><span class="p">(</span><span class="n">board</span><span class="p">),</span> <span class="kc">None</span>
+
+    <span class="n">best_move</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">is_maximizing</span><span class="p">:</span>
+        <span class="n">max_eval</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"-inf"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">get_legal_moves</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+            <span class="n">new_board</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+            <span class="n">new_board</span><span class="p">[</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">"X"</span>
+            <span class="nb">eval</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">minimax</span><span class="p">(</span><span class="n">new_board</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">eval</span> <span class="o">&gt;</span> <span class="n">max_eval</span><span class="p">:</span>
+                <span class="n">max_eval</span> <span class="o">=</span> <span class="nb">eval</span>
+                <span class="n">best_move</span> <span class="o">=</span> <span class="n">move</span>
+        <span class="k">return</span> <span class="n">max_eval</span><span class="p">,</span> <span class="n">best_move</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">min_eval</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">get_legal_moves</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+            <span class="n">new_board</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+            <span class="n">new_board</span><span class="p">[</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">"O"</span>
+            <span class="nb">eval</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">minimax</span><span class="p">(</span><span class="n">new_board</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">eval</span> <span class="o">&lt;</span> <span class="n">min_eval</span><span class="p">:</span>
+                <span class="n">min_eval</span> <span class="o">=</span> <span class="nb">eval</span>
+                <span class="n">best_move</span> <span class="o">=</span> <span class="n">move</span>
+        <span class="k">return</span> <span class="n">min_eval</span><span class="p">,</span> <span class="n">best_move</span>
+                
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7702,106 +7603,43 @@ WorksIn(profA, CSDept)
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### Project 1 trackeo Trackeo is a digital platform that centralizes athletics data, rankings, and performance tracking for Latin American athletes, coaches, and federations, aiming to bring transparency, visibility, and modern analytics to the regional athletics ecosystem **</span>
-<span class="c1">### **Chapter 1**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- What is AI, its history, and its impact."</span>
-<span class="s2">"- Ethical considerations and social implications."</span>
-<span class="c1">#### Application to Trackeo</span>
-<span class="s2">"- Define **Trackeo’s AI vision and ethics** (fair data usage, privacy, bias prevention)."</span>
-<span class="s2">"- Design an **AI roadmap** for integrating intelligent systems."</span>
-<span class="s2">"- Support pitch deck and company documentation with an **academic justification for AI’s role** in sports analytics."</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">play_game</span><span class="p">():</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">" "</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Welcome to Tic-Tac-Toe! You are O. Computer is X."</span><span class="p">)</span>
+    <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
 
-<span class="c1">### **Chapter 2 – Intelligent Agents**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Agents and environments."</span>
-<span class="s2">"- Rational decision-making and agent structures."</span>
-<span class="c1">#### Application to Trackeo</span>
-<span class="s2">"- Model each **athlete, coach, or federation** as an *agent* interacting with an environment (competitions, data, events)."</span>
-<span class="s2">"- Build **AI-based tracking agents** that automatically:"</span>
-<span class="s2">"- Update performance data."</span>
-<span class="s2">"- Send qualifying alerts."</span>
-<span class="s2">"- Suggest upcoming competitions."</span>
-<span class="s2">"- Enable **adaptive dashboards** that respond dynamically to new information."</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">is_terminal</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+        <span class="n">move</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="n">move</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">get_legal_moves</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Enter your move as row,col (e.g., 1,2): "</span><span class="p">)</span>
+                <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">user_input</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">))</span>
+                <span class="n">move</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Invalid input. Try again."</span><span class="p">)</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">"O"</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Your move:"</span><span class="p">)</span>
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_terminal</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+            <span class="k">break</span>
 
-<span class="c1">### **Chapter 3 – Solving Problems by Searching**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Problem solving agents, search trees, uninformed and informed search."</span>
-<span class="c1">#### Application to Trackeo</span>
-<span class="s2">"- Efficiently **"</span>
-<span class="s2">"search and rank athletes or performances** in large datasets."</span>
-<span class="s2">"- Implement **heuristic-based searches** for queries like:"</span>
-<span class="s2">"- “Find all 400m runners under 46s in South America.”"</span>
-<span class="s2">"- Build **recommendation systems** for coaches or scouts to discover athletes."</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">comp_move</span> <span class="o">=</span> <span class="n">minimax</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">comp_move</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">comp_move</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">"X"</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Computer's move:"</span><span class="p">)</span>
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
 
-
-<span class="c1">### **Chapter 4 – Search in Complex Environments**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Optimization, continuous spaces, partial observability."</span>
-<span class="c1">#### Application to Trackeo</span>
-<span class="s2">"- Handle **real-world uncertainty** (incomplete data, delayed results)."</span>
-<span class="s2">"- Use **optimization algorithms** for:"</span>
-<span class="s2">"- Competition scheduling."</span>
-<span class="s2">"- Resource allocation for federations."</span>
-<span class="s2">"- Design **adaptive systems** that can update rankings as new data streams in."</span>
-
-<span class="c1">### **Chapter 5 – Constraint Satisfaction Problems (CSPs)**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Constraints, variables, backtracking, and optimization."</span>
-<span class="c1">#### Application to Trackeo</span>
-<span class="s2">"- Automate **meet scheduling and lane assignments**."</span>
-<span class="s2">"- Validate **qualifying standards** automatically (e.g., “Top 3 under 10.50s qualify”)."</span>
-<span class="s2">"- Build a **smart event planner** that avoids scheduling conflicts."</span>
-
-
-<span class="c1">### **Chapter 6 – Adversarial Search and Games**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Game theory, minimax, stochastic games, and decision-making under competition."</span>
-<span class="c1">#### Application to Trackeo</span>
-<span class="s2">"- Simulate **competitive scenarios** between athletes."</span>
-<span class="s2">"- Predict outcomes or **compare training strategies** using simplified game models."</span>
-<span class="s2">"- Model **federation-level decision-making** in strategic competitions."</span>
-
-
-<span class="c1">### **Chapter 7 – Logical Agents**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Knowledge-based systems, propositional logic, reasoning."</span>
-<span class="c1">#### Application to Trackeo</span>
-<span class="s2">"- Develop a **knowledge base** containing:"</span>
-<span class="s2">"- Competition rules."</span>
-<span class="s2">"- Qualification standards."</span>
-<span class="s2">"- Athlete and event relationships."</span>
-<span class="s2">"- Use **logic-based inference** to:"</span>
-<span class="s2">"- Automatically determine who qualifies for championships."</span>
-<span class="s2">"- Detect missing or inconsistent data."</span>
-<span class="s2">"- Build a **Q&amp;A system** for federations (e.g., “Who leads the U20 800m rankings?”)."</span>
-
-<span class="c1">### **Chapter 8 – First-Order Logic**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Syntax and semantics of FOL, reasoning about objects and relationships."</span>
-<span class="c1">#### Application to Trackeo</span>
-<span class="s2">"- Represent relationships between **athletes, events, clubs, and results**."</span>
-<span class="s2">"- Enable **semantic search**:"</span>
-<span class="s2">"- “Find all athletes who ran under 21s in the 200m and are under 20 years old.”"</span>
-<span class="s2">"- Build a foundation for **intelligent query engines** and **data consistency checks**."</span>
+    <span class="k">if</span> <span class="n">check_winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s2">"X"</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Computer wins!"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">check_winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"You win!"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"It's a draw!"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'- Build a foundation for **intelligent query engines** and **data consistency checks**.'</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7809,75 +7647,31 @@ WorksIn(profA, CSDept)
 <div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### **Project 2 – Strava for Dancers**</span>
-<span class="s2">"Strava for Dancers is an intelligent motion analytics platform that tracks, analyzes, and shares dance performances. "</span>
-<span class="s2">"It helps dancers train smarter, connect with others, and showcase progress using AI-powered movement tracking, performance insights, and social motivation tools."</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">report_mode</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Run a quick automatic demo game for reporting."""</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">" "</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+    <span class="n">turn</span> <span class="o">=</span> <span class="s2">"X"</span>  <span class="c1"># Computer starts</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Tic-Tac-Toe Automatic Report Mode"</span><span class="p">)</span>
+    <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
 
-<span class="c1">### **Chapter 1 – Introduction**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- What is AI, its history, and its impact."</span>
-<span class="s2">"- Ethical considerations and social implications."</span>
-<span class="c1">#### Application to Strava for Dancers</span>
-<span class="s2">"- Define **Strava for Dancers’ AI vision**: empowering dancers through transparent and inclusive technology."</span>
-<span class="s2">"- Apply **AI ethics principles**: respect for privacy, creative ownership, and fair recognition of performance data."</span>
-<span class="s2">"- Establish **AI’s role in movement arts**: bridging creativity with measurable physical and expressive performance."</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">is_terminal</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">turn</span> <span class="o">==</span> <span class="s2">"X"</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">move</span> <span class="o">=</span> <span class="n">minimax</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">move</span> <span class="o">=</span> <span class="n">minimax</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">move</span><span class="p">:</span>
+            <span class="n">board</span><span class="p">[</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">turn</span>
+        <span class="n">turn</span> <span class="o">=</span> <span class="s2">"O"</span> <span class="k">if</span> <span class="n">turn</span> <span class="o">==</span> <span class="s2">"X"</span> <span class="k">else</span> <span class="s2">"X"</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
 
-<span class="c1">### **Chapter 2 – Intelligent Agents**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Agents and environments."</span>
-<span class="s2">"- Rational decision-making and agent structures."</span>
-<span class="c1">#### Application to Strava for Dancers</span>
-<span class="s2">"- Represent each **dancer, instructor, and studio** as an *agent* operating in a shared digital environment."</span>
-<span class="s2">"- Design **AI agents** that automatically:"</span>
-<span class="s2">"- Track movement using pose estimation and motion recognition."</span>
-<span class="s2">"- Provide feedback on form, tempo, and energy."</span>
-<span class="s2">"- Suggest personalized training goals or choreography practice."</span>
-<span class="s2">"- Enable **adaptive dashboards** that evolve with dancer progress and goals."</span>
-
-
-<span class="c1">### **Chapter 3 – Solving Problems by Searching**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Problem-solving agents, search trees, heuristics."</span>
-<span class="c1">#### Application to Strava for Dancers</span>
-<span class="s2">"- Implement **search-based recommendations** such as:"</span>
-<span class="s2">"- Find routines that improve balance and core control."</span>
-<span class="s2">"- Suggest practice sessions similar to my last freestyle recording."</span>
-<span class="s2">"- Use **heuristics** to rank sessions by difficulty, rhythm complexity, or tempo stability."</span>
-<span class="s2">"- Build **discovery tools** for dancers to explore routines, challenges, and training partners."</span>
-
-<span class="c1">### **Chapter 7 – Logical Agents**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Knowledge-based systems, propositional logic, reasoning."</span>
-<span class="c1">#### Application to Strava for Dancers</span>
-<span class="s2">"- Create a **knowledge base** of dance styles, tempo categories, and move vocabularies."</span>
-<span class="s2">"- Use **logic-based inference** to:"</span>
-<span class="s2">"- Identify missing or inconsistent data in dance tracking."</span>
-<span class="s2">"- Automatically categorize routines by style, tempo, and intensity."</span>
-<span class="s2">"- Power an **intelligent Q&amp;A system** for dancers (e.g., “Show my top three highest energy routines this month”)."</span>
-
-
-<span class="c1">### **Chapter 8 – First-Order Logic**</span>
-<span class="c1">#### Key Concepts</span>
-<span class="s2">"- Syntax and semantics of FOL, reasoning about objects and relationships."</span>
-<span class="c1">#### Application to Strava for Dancers</span>
-<span class="s2">"- Represent relationships between **dancers, sessions, choreography, and studios**."</span>
-<span class="s2">"- Enable **semantic search queries** like:"</span>
-<span class="s2">"- Find dancers who practiced hip-hop and jazz this week."</span> 
-<span class="s2">"- “List sessions over 5 minutes with tempo &gt;120 BPM.”"</span>
-<span class="s2">"- Build the foundation for **smart data retrieval** and **AI choreography recommendations**."</span>
+    <span class="k">if</span> <span class="n">check_winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s2">"X"</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Computer (X) wins!"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">check_winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Opponent (O) wins!"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"It's a draw!"</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'- Build the foundation for **smart data retrieval** and **AI choreography recommendations**.'</pre>
 </div>
 </div>
 </div>
@@ -7890,45 +7684,10 @@ WorksIn(profA, CSDept)
 <div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### **Project 5 – FoodPrint**</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Uncomment depending on what I want to run:</span>
 
-<span class="c1">####**Description:**####</span>
-<span class="s2">"FoodPrint is an AI app that scans menus or barcodes to estimate the **nutritional value** and **environmental impact** of what you eat."</span>
-<span class="s2">"It helps users make **smarter, lower-impact meal choices** through **computer vision** and **sustainability analytics**."</span>
-
-
-<span class="c1">### **Chapter 2 – Intelligent Agents**</span>
-<span class="c1">#### Why </span>
-<span class="s2">"- FoodPrint acts as an intelligent agent that perceives (via camera/barcode), reasons (nutrition + impact), and acts (suggests swaps)."</span>  
-<span class="s2">"- Each user can be modeled as an agent with goals — e.g., eat healthier, reduce footprint — while the app functions as a goal-driven assistant."</span>
-<span class="c1">#### Application to FoodPrint</span>
-<span class="s2">"- Define the agent’s environment: menus, packaging, and user preferences."</span>  
-<span class="s2">"- Build rational behavior: suggest swaps that optimize both **health** and **sustainability**."</span>  
-<span class="s2">"- Enable adaptive feedback: the agent learns from user choices over time and refines its recommendations."</span>
-
-
-<span class="c1">### **Chapter 4 – Search in Complex Environments**</span>
-<span class="c1">#### Why </span>
-<span class="s2">"- Meal swaps involve multi-objective optimization — balancing taste, nutrition, carbon footprint, and availability."</span>  
-<span class="s2">"- The system must search through large, partially observable spaces (e.g., missing ingredients, vague menu descriptions)."</span>
-<span class="c1">#### Application to FoodPrint</span>
-<span class="s2">"- Use **heuristics** to rank alternatives (e.g., “lower footprint but similar protein”)."</span>  
-<span class="s2">"- Handle **uncertainty**: estimate impact even when full data isn’t available."</span>  
-<span class="s2">"- Optimize recommendations based on user constraints (e.g., vegetarian, allergies, price range)."</span>
-
-
-<span class="c1">### **Chapter 8 – First-Order Logic**</span>
-<span class="c1">#### Why </span>
-<span class="s2">"- FoodPrint can represent relationships like:"</span>  
-<span class="s2">" `Contains(menuItem, ingredient)`"</span>  
-<span class="s2">" `HasImpact(ingredient, carbonScore)`"</span>  
-<span class="s2">" `SwapSuggestion(menuItem, alternativeItem)`"</span>  
-<span class="s2">" These logical structures enable reasoning about food composition and sustainability rules."</span>
-<span class="c1">#### Application to FoodPrint</span>
-<span class="s2">" Encode rules such as:"</span>  
-<span class="s2">" If a meal contains beef, its impact is high.”"</span>  
-<span class="s2">" If a user prefers low-impact meals, suggest plant-based swaps.”"</span>  
-<span class="s2">" Build a **knowledge base** of food facts, dietary rules, and environmental scores to support consistent, explainable AI recommendations."</span>
+<span class="c1"># play_game()   # Interactive: User play against computer</span>
+<span class="n">report_mode</span><span class="p">()</span> <span class="c1"># Automatic: AI vs AI ( for report.html later)</span>
 </pre></div>
 </div>
 </div>
@@ -7938,10 +7697,81 @@ WorksIn(profA, CSDept)
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'- Build a **knowledge base** of food facts, dietary rules, and environmental scores to support consistent, explainable AI recommendations.'</pre>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Tic-Tac-Toe Automatic Report Mode
+  |   |  
+---------
+  |   |  
+---------
+  |   |  
+---------
+
+X |   |  
+---------
+  |   |  
+---------
+  |   |  
+---------
+
+X |   |  
+---------
+  | O |  
+---------
+  |   |  
+---------
+
+X | X |  
+---------
+  | O |  
+---------
+  |   |  
+---------
+
+X | X | O
+---------
+  | O |  
+---------
+  |   |  
+---------
+
+X | X | O
+---------
+  | O |  
+---------
+X |   |  
+---------
+
+X | X | O
+---------
+O | O |  
+---------
+X |   |  
+---------
+
+X | X | O
+---------
+O | O | X
+---------
+X |   |  
+---------
+
+X | X | O
+---------
+O | O | X
+---------
+X | O |  
+---------
+
+X | X | O
+---------
+O | O | X
+---------
+X | O | X
+---------
+It's a draw!
+</pre>
 </div>
 </div>
 </div>

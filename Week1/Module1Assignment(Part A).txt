@@ -1,0 +1,38 @@
+Read Chapter 1 and then answer these questions:
+
+Define in your own words: (a) intelligence, (b) artificial intelligence, (c) agent, (d) rationality, (e) logical reasoning.
+Are reflex actions (such as flinching from a hot stove) rational? Are they intelligent?
+Suppose we extend Evans’s SYSTEM program so that it can score 200 on a standard IQ test. Would we then have a program more intelligent than a human? Explain.
+Is AI a science, or is it engineering? Or neither or both? Explain.
+“Surely computers cannot be intelligent—they can do only what their programmers tell them.” Is the latter statement true, and does it imply the former?
+
+
+Answers:
+
+In my own words I will define:
+
+Intelligence: I not only define but also perceive intelligence as the capacity of a being to be able to efficiently survive in the environment in which they live, this through learning from experience, and, top adapt,  to adapt is to approach situations with new perspectives and understanding, using the tools and the knowledge that one can possesses to their fullest, it's always growing and is infinite, i believe there is much that the human brain cannot even comprehend and this doesn't mean that there is a limit to intelligence, this just show how we experience as well as comprehend our reality.
+
+Artificial Intelligence: This one is a little more tricky, still, doesn't amazes me as much and not even close to the human intelligence, and this is far away from being a fair match to the human intelligence, or at least I hope I'm right in this one.
+Now, I will define Artificial Intelligence as giant database that is able to interact with it's own information and data thanks to the algorithms "(set of well defined, step-by-step instructions designed to solve a specific problem or accomplish a task, especially in computing.)" that it uses to create conclusions, identify patterns and come to conclusions based on what is already stated as factual or not in our society. 
+
+Agent: An agent con be someone or something that acts by orders or in behalf of someone, they could represent their "principal"
+
+Rationality: Capacity to operate with the end goal of looking for the best scenario possible, combining mostly facts and a logic that satisfies the end goal. Usually acting based on emotions is not considered national, I believe, emotions gives us humans, the capacity to understand ourselves better in order to know what our strengths and areas of opportunity, by identifying this and being more aware of who we are, we can use a better use of facts, and a logic that we can understand better. Also I believe passion can't exist without no emotion.
+
+Logical Reasoning: I believe logical reasoning has to do with the human process of being able to put emotions on a side, and having the ability to carefully see and analyze information, this to draw a conclusion and determine how different elements from a set of information relate to each other, this process makes us understand better the situations the are currently happening and act on them, without necessarily agreeing on them.
+
+
+Are reflex actions (such as flinching from a hot stove) rational? Are they intelligent?
+Are they rational? No, it's a survival instinct.
+Are they intelligent? Yes, without this an specie would not know what is good or bad for its existence and will die, therefore there will be no specie, and it would have failed its only known purpose.
+
+Suppose we extend Evans’s SYSTEM program so that it can score 200 on a standard IQ test. Would we then have a program more intelligent than a human? Explain.
+No, not necessarily more intelligent but yes more able to respond and draw conclusions based on a set of fixed questions that have a fixed answer and also fixed ways of reasoning this answer with fixed patterns.
+
+
+Is AI a science, or is it engineering? Or neither or both? Explain.
+AI is both and also could be everything else, but I'm not sure about the last, it exists because of science and it works because of engineering.
+
+“Surely computers cannot be intelligent—they can do only what their programmers tell them.” Is the latter statement true, and does it imply the former?
+Are they intelligent? No, Are they an intelligent being? No, Are they able to execute tasks that highly intelligent people can perform? Yes. Computers are not intelligent in a way the need to operate in order to satisfy a need of their own, but, they can perform tasks that intelligent people do, and this is because they were created with the abilities to perform this tasks because in how they are programmed they were given the capacity to access data and operate in order to solve a problem that requires the accurate use of the data they already have, they to this actions by the implementations of algorithms, thanks to this their answers and everything that is product of a computer is so accurate, is because there is already an answer for our own questions, we just have to analyse the data and some times, this takes to long, because we are humans and we don't use only logic, NEVER. Computers, do.
