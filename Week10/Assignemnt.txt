@@ -1,0 +1,7 @@
+Read Chapter 10 and then answer these questions:
+
+Define in your own words what knowledge representation is and why it is important. Include several examples in your answer.
+Define an ontology in first-order logic for tic-tac-toe. The ontology should contain situations, actions, squares, players, marks (X, O, or blank), and the notion of winning, losing, or drawing a game. Also define the notion of a forced win (or draw): a position from which a player can force a win (or draw) with the right sequence of actions. Write axioms for the domain. (Note: The axioms that enumerate the different squares and that characterize the winning positions are rather long. You need not write these out in full, but indicate clearly what they look like.)
+In addition, implement an ontology in first order logic for your proposed project in a Python program. Make sure to touch upon most/all topics covered in the chapter, e.g., categories, objects, events, time, etc. Again, you should explore GenAI tools to help you write some of the code and make sure to test it as well. Implement your solution in a Jupyter notebook and submit the resulting analysis in both html and ipynb format.
+
+Please submit a single PDF containing answers to all of the above (except for the Jupyter notebook files).
