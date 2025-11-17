@@ -1,0 +1,15 @@
+Read Chapter 9 and then answer these questions:
+
+Given the around 10 sentences you used to describe (a subset of) the university domain for the previous assignment, work through an example how reduction to propositional inference could be implemented.
+Similarly, do the same thing but then for forward chaining.
+In addition, implement forward chaining for the same example in a Python program. Again, you should explore GenAI tools to help you write some of the code and make sure to test it as well. Implement your solution in a Jupyter notebook and submit the resulting analysis in both html and ipynb format.
+
+Finally, pick one of the three project ideas from last week and work it out in more detail and answer the following bullets for guidance:
+
+Explain in more detail the problem you are trying to solve, e.g., what are the inputs, what are the outputs, etc.
+For each Chapter of the book, explain how you are going to use that in the project you are proposing. You do not have to use an approach from every Chapter, but you should use concepts from at least the majority of Chapters.
+Feel free to expand on the problem if needed so that you can use additional Chapters to solve the problem.
+Ideally, your project should be like the Wumpus world, which was used in multiple Chapters to illustrate how certain concepts worked.
+You approach should be as unique as possible, i.e., if multiple students solve the same problem they will receive fewer points.
+Eventually, you will need to submit a final project report (which you also present during finals week) that contains both the ideas and theory as well as working Python code (similar to the assignments).
+Please submit a single PDF containing answers to all of the above (except for the Jupyter notebook files).

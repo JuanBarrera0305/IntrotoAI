@@ -1,0 +1,10 @@
+Read Chapter 8 and then answer these questions:
+
+Use around 10 (logical) sentences to describe (a subset of) the university domain (analogous to the other domains introduced in Section 8.3), i.e., students, professors, courses, etc. What new knowledge can be deduced from these sentences?
+In addition, implement a simple first order logic approach in a Python program. You should explore GenAI tools to help you write some of the code and then use the university domain from the previous question to test your code. Implement your solution in a Jupyter notebook and submit the resulting analysis in both html and ipynb format.
+
+Finally, write a reflection on this course so far and include ideas for final projects that would be very useful to you:
+
+For each Chapter (including 8), describe in a few sentences how useful it was, the key insights you took away from it, and how you can apply this knowledge in a professional setting.
+Given the content of all Chapters up to this point, suggest at least 3 projects you could work on that could help you in your professional careers.
+Please submit a single PDF containing answers to all of the above (except for the Jupyter notebook files).

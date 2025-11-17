@@ -1,0 +1,8 @@
+Read Chapter 11 and then answer these questions:
+
+Define a simple PPDL description akin the airport example in Section 11.1.1 to attend a Steelers game. Define Init, Goal, as well as between 3 and 5 actions. Make sure it is solvable.
+In addition, implement a Python program that solves the Steelers PDDL. Make sure to use one of the approaches presented in the Chapter. Again, you should explore GenAI tools to help you write some of the code and make sure to test it as well. Implement your solution in a Jupyter notebook and submit the resulting analysis in both html and ipynb format.
+
+Finally, please create a Python notebook and in there explain how automated planning (PDDL in particular) can be used to solve the problems proposed for your final project. If you do not have a direct application, please extend your problem proposed to include something where planning is relevant. Finally, make sure to include some prototype Python code in the notebook that shows how the problem could be solved and submit in both html and ipynb format.
+
+Please submit a single PDF containing answers to all of the above (except for the Jupyter notebook files).

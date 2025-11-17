@@ -1,0 +1,7 @@
+Read Chapter 12 and then answer these questions:
+
+Would it be rational for an agent to hold the three beliefs P(A)=0.4, P(B)=0.3, and P(A∨B)=0.5? If so, what range of probabilities would be rational for the agent to hold for P(A∧B)? Feel free to construct a table to document all different possibilities.
+After your yearly checkup, the doctor has bad news and good news. The bad news is that you tested positive for a serious disease and that the test is 99% accurate (i.e., the probability of testing positive when you do have the disease is 0.99, as is the probability of testing negative when you don’t have the disease). The good news is that this is a rare disease, striking only 1 in 10,000 people of your age. Why is it good news that the disease is rare? What are the chances that you actually have the disease?
+Finally, please create a Python notebook and work out a problem for your final project using the approaches described in Chapter 12 Quantifying Uncertainty similar to the examples worked out during class. If you do not have a direct application, please extend your problem proposed to include something where planning is relevant.
+
+Please submit a single PDF containing answers to all of the above (except for the Jupyter notebook files).
