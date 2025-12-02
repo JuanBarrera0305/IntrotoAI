@@ -1,0 +1,5 @@
+Consider the Bayesian network in Figure Burglary:Links to an external site.
+1. If no evidence is observed, are Burglary and Earthquake independent? Prove this from the numerical semantics and from the topological semantics.
+2. If we observe Alarm=true, are Burglary and Earthquake (conditionally) independent? Justify your answer by calculating whether the probabilities involved satisfy the definition of conditional independence. (Note: this is known as explaining away.)
+Define a Bayesian network that captures at least 5 variables that affect your performance in this class. Try to give some idea of what the CPTs should look like.
+Finally, please create a Python notebook and work out a problem using a Bayesian network for your final project using the approaches described in Chapter 13 Probabilistic Reasoning similar to the examples worked out during class. If you do not have a direct application, please extend your problem proposed to include something where planning is relevant.
