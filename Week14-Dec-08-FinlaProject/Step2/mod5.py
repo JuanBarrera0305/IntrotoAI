@@ -7,7 +7,13 @@ import random
 # 1. LOAD DATA
 # ============================================================
 def load_schedule(path="Heats_hillclimb.csv"):
-    return pd.read_csv(path)
+    df = pd.read_csv(path)
+    df.columns = df.columns.str.strip()
+
+    # Ensure Athlete ID stays intact and numeric
+    df["Athlete ID"] = df["Athlete ID"].astype(int)
+
+    return df
 
 
 # ============================================================
@@ -47,22 +53,21 @@ def evaluate_schedule(df):
 def max_optimal_arrangement(df):
     new_df = df.copy()
 
-    # Sort by rank
-    new_df = new_df.sort_values(by="Current Rank").reset_index(drop=True)
+    # FIXED: Sort while preserving Athlete ID alignment
+    new_df = new_df.sort_values(by=["Current Rank", "Athlete ID"])
 
     num_heats = new_df["Heat"].nunique()
 
-    # Round-robin assign heats
-    new_df["Heat"] = (new_df.index % num_heats) + 1
+    # FIXED: Assign heats without destroying Athlete ID
+    new_df["Heat"] = (np.arange(len(new_df)) % num_heats) + 1
 
-    # Lane priority
     lane_order = [4, 5, 3, 6, 2, 7, 1, 8]
 
     # Assign lanes inside each heat
     for heat_id, heat_df in new_df.groupby("Heat"):
-        sorted_heat = heat_df.sort_values(by="Seed Time").reset_index()
+        sorted_heat = heat_df.sort_values(by="Seed Time")
 
-        for i, idx in enumerate(sorted_heat["index"]):
+        for i, idx in enumerate(sorted_heat.index):
             new_df.at[idx, "Lane"] = lane_order[i]
 
     return new_df
@@ -122,9 +127,6 @@ def alpha_beta(df, depth, alpha, beta, maximizing_player=True):
     if depth == 0:
         return min_judge(df), df
 
-    # ======================================================
-    # MAX — try 3 move types
-    # ======================================================
     if maximizing_player:
         best_value = -np.inf
         best_df = df
@@ -143,7 +145,6 @@ def alpha_beta(df, depth, alpha, beta, maximizing_player=True):
         # Move 3: Swap between heats
         candidate_moves.append(swap_between_heats(df))
 
-        # Evaluate candidate moves
         for move_df in candidate_moves:
             value, child_df = alpha_beta(move_df, depth - 1, alpha, beta, False)
 
@@ -157,9 +158,6 @@ def alpha_beta(df, depth, alpha, beta, maximizing_player=True):
 
         return best_value, best_df
 
-    # ======================================================
-    # MIN — judge only
-    # ======================================================
     else:
         value = min_judge(df)
         return value, df
@@ -179,8 +177,8 @@ def run_alpha_beta():
     print("\nRunning Hybrid MAX Alpha-Beta (depth=2)...")
     best_score, best_df = alpha_beta(original, depth=2, alpha=-np.inf, beta=np.inf)
 
-    # ⭐ SORT BY HEAT AND LANE BEFORE SAVING ⭐
-    best_df = best_df.sort_values(by=["Heat", "Lane"]).reset_index(drop=True)
+    # FIXED: Do not drop or rewrite ID!
+    best_df = best_df.sort_values(by=["Heat", "Lane"])
 
     print("\n==============================")
     print(f"Best Score Found = {best_score:.4f}")

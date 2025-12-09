@@ -1,0 +1,9 @@
+Athlete ID,Name,School,FinalLane,ProbGold,ProbMedal,PredictedFinalTime
+3,Carlos Smith   ,Villanova University     ,4,0.1778,0.4782,10.365114404886045
+2,Lucas Anderson ,Lafayette College        ,5,0.174,0.46575,10.366887060483513
+18,Mateo Lee      ,Duquesne University      ,3,0.1268,0.3884,10.38030873061084
+7,Noah Smith     ,Lock Haven University    ,6,0.12305,0.3737,10.38155301550667
+9,Carlos Johnson ,West Chester University  ,2,0.12265,0.3704,10.382305525577895
+5,Owen Martinez  ,Bucknell University      ,7,0.1148,0.3575,10.384551585372039
+1,Jacob Martinez ,University of Pittsburgh ,1,0.0961,0.3251,10.390728522469383
+6,Ryan Garcia    ,Lock Haven University    ,8,0.0648,0.24095,10.406732217385011
