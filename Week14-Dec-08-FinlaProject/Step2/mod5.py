@@ -177,7 +177,6 @@ def run_alpha_beta():
     print("\nRunning Hybrid MAX Alpha-Beta (depth=2)...")
     best_score, best_df = alpha_beta(original, depth=2, alpha=-np.inf, beta=np.inf)
 
-    # FIXED: Do not drop or rewrite ID!
     best_df = best_df.sort_values(by=["Heat", "Lane"])
 
     print("\n==============================")

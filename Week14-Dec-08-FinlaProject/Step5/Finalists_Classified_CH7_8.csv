@@ -1,33 +1,33 @@
-Athlete ID,Name,School,Heat,Lane,Prelims,Place,Qualification,StrongFinalist,DarkHorse
-25,Noah Flores     ,Lock Haven University      ,1,1,10.577,2,Auto,0,0
-20,Owen Rivera     ,Slippery Rock University   ,1,2,10.493,1,Auto,0,0
-6,Ryan Garcia     ,Lock Haven University      ,1,3,10.408,1,Auto,1,0
-18,Mateo Lee       ,Duquesne University        ,1,4,10.322,1,Auto,1,0
-7,Noah Smith      ,Lock Haven University      ,1,5,10.373,1,Auto,1,0
-12,Brandon Garcia  ,La Salle University        ,1,6,10.457,1,Auto,1,0
-30,Lucas Garcia    ,Villanova University       ,1,7,10.541,3,Time,0,1
-23,Noah Rivera     ,West Chester University    ,1,8,10.636,3,Time,0,0
-35,Chris Martinez  ,University of Pittsburgh   ,2,1,10.615,2,Auto,0,0
-33,Carlos Rivera   ,Slippery Rock University   ,2,2,10.493,2,Auto,0,0
-1,Jacob Martinez  ,University of Pittsburgh   ,2,3,10.41,1,Auto,1,0
-9,Carlos Johnson  ,West Chester University    ,2,4,10.362,1,Auto,1,0
-5,Owen Martinez   ,Bucknell University        ,2,5,10.382,2,Auto,1,0
-17,Ryan Brown      ,Duquesne University        ,2,6,10.461,1,Auto,1,0
-14,Brandon Johnson ,Bucknell University        ,2,7,10.553,3,Time,0,0
-29,Ethan Garcia    ,La Salle University        ,2,8,10.636,3,Time,0,0
-24,Ethan Gonzalez  ,Saint Joseph's University  ,3,1,10.626,2,Auto,0,0
-4,Noah Brown      ,Slippery Rock University   ,3,2,10.5,2,Auto,0,0
-28,Alex Anderson   ,Duquesne University        ,3,3,10.415,1,Auto,1,0
-3,Carlos Smith    ,Villanova University       ,3,4,10.365,1,Auto,1,0
-10,Lucas Garcia    ,Lock Haven University      ,3,5,10.392,1,Auto,1,0
-21,Lucas Lopez     ,West Chester University    ,3,6,10.464,2,Auto,1,0
-13,Ryan Davis      ,Penn State University      ,3,7,10.554,2,Auto,0,0
-45,Alex Rivera     ,Lafayette College          ,3,8,10.659,3,Time,0,0
-31,Brandon Perez   ,Saint Joseph's University  ,4,1,10.632,3,Time,0,0
-15,Brandon Rivera  ,Saint Joseph's University  ,4,2,10.54,2,Auto,0,0
-26,Jacob Gonzalez  ,La Salle University        ,4,3,10.432,2,Auto,1,0
-2,Lucas Anderson  ,Lafayette College          ,4,4,10.372,1,Auto,1,0
-16,Alex Martinez   ,Saint Joseph's University  ,4,5,10.396,2,Auto,1,0
-11,Jacob Gonzalez  ,Villanova University       ,4,6,10.482,1,Auto,0,0
-22,John Davis      ,Penn State University      ,4,7,10.575,2,Auto,0,0
-32,Owen Davis      ,Carnegie Mellon University ,4,8,10.731,2,Auto,0,0
+Athlete ID ,Name            ,School                     ,Heat ,Lane ,Prelims ,Place ,Qualification ,StrongFinalist ,DarkHorse
+        25 ,Noah Flores     ,Lock Haven University      ,   1 ,   1 , 10.577 ,    2 ,Auto          ,             0 ,        0
+        20 ,Owen Rivera     ,Slippery Rock University   ,   1 ,   2 , 10.493 ,    1 ,Auto          ,             0 ,        0
+         6 ,Ryan Garcia     ,Lock Haven University      ,   1 ,   3 , 10.408 ,    1 ,Auto          ,             1 ,        0
+        18 ,Mateo Lee       ,Duquesne University        ,   1 ,   4 , 10.322 ,    1 ,Auto          ,             1 ,        0
+         7 ,Noah Smith      ,Lock Haven University      ,   1 ,   5 , 10.373 ,    1 ,Auto          ,             1 ,        0
+        12 ,Brandon Garcia  ,La Salle University        ,   1 ,   6 , 10.457 ,    1 ,Auto          ,             1 ,        0
+        30 ,Lucas Garcia    ,Villanova University       ,   1 ,   7 , 10.541 ,    3 ,Time          ,             0 ,        1
+        23 ,Noah Rivera     ,West Chester University    ,   1 ,   8 , 10.636 ,    3 ,Time          ,             0 ,        0
+        35 ,Chris Martinez  ,University of Pittsburgh   ,   2 ,   1 , 10.615 ,    2 ,Auto          ,             0 ,        0
+        33 ,Carlos Rivera   ,Slippery Rock University   ,   2 ,   2 , 10.493 ,    2 ,Auto          ,             0 ,        0
+         1 ,Jacob Martinez  ,University of Pittsburgh   ,   2 ,   3 , 10.41  ,    1 ,Auto          ,             1 ,        0
+         9 ,Carlos Johnson  ,West Chester University    ,   2 ,   4 , 10.362 ,    1 ,Auto          ,             1 ,        0
+         5 ,Owen Martinez   ,Bucknell University        ,   2 ,   5 , 10.382 ,    2 ,Auto          ,             1 ,        0
+        17 ,Ryan Brown      ,Duquesne University        ,   2 ,   6 , 10.461 ,    1 ,Auto          ,             1 ,        0
+        14 ,Brandon Johnson ,Bucknell University        ,   2 ,   7 , 10.553 ,    3 ,Time          ,             0 ,        0
+        29 ,Ethan Garcia    ,La Salle University        ,   2 ,   8 , 10.636 ,    3 ,Time          ,             0 ,        0
+        24 ,Ethan Gonzalez  ,Saint Joseph's University  ,   3 ,   1 , 10.626 ,    2 ,Auto          ,             0 ,        0
+         4 ,Noah Brown      ,Slippery Rock University   ,   3 ,   2 , 10.5   ,    2 ,Auto          ,             0 ,        0
+        28 ,Alex Anderson   ,Duquesne University        ,   3 ,   3 , 10.415 ,    1 ,Auto          ,             1 ,        0
+         3 ,Carlos Smith    ,Villanova University       ,   3 ,   4 , 10.365 ,    1 ,Auto          ,             1 ,        0
+        10 ,Lucas Garcia    ,Lock Haven University      ,   3 ,   5 , 10.392 ,    1 ,Auto          ,             1 ,        0
+        21 ,Lucas Lopez     ,West Chester University    ,   3 ,   6 , 10.464 ,    2 ,Auto          ,             1 ,        0
+        13 ,Ryan Davis      ,Penn State University      ,   3 ,   7 , 10.554 ,    2 ,Auto          ,             0 ,        0
+        45 ,Alex Rivera     ,Lafayette College          ,   3 ,   8 , 10.659 ,    3 ,Time          ,             0 ,        0
+        31 ,Brandon Perez   ,Saint Joseph's University  ,   4 ,   1 , 10.632 ,    3 ,Time          ,             0 ,        0
+        15 ,Brandon Rivera  ,Saint Joseph's University  ,   4 ,   2 , 10.54  ,    2 ,Auto          ,             0 ,        0
+        26 ,Jacob Gonzalez  ,La Salle University        ,   4 ,   3 , 10.432 ,    2 ,Auto          ,             1 ,        0
+         2 ,Lucas Anderson  ,Lafayette College          ,   4 ,   4 , 10.372 ,    1 ,Auto          ,             1 ,        0
+        16 ,Alex Martinez   ,Saint Joseph's University  ,   4 ,   5 , 10.396 ,    2 ,Auto          ,             1 ,        0
+        11 ,Jacob Gonzalez  ,Villanova University       ,   4 ,   6 , 10.482 ,    1 ,Auto          ,             0 ,        0
+        22 ,John Davis      ,Penn State University      ,   4 ,   7 , 10.575 ,    2 ,Auto          ,             0 ,        0
+        32 ,Owen Davis      ,Carnegie Mellon University ,   4 ,   8 , 10.731 ,    2 ,Auto          ,             0 ,        0

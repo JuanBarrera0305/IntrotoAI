@@ -1,16 +1,3 @@
-"""
-CHAPTER 10 – Prelims Simulation (Planning & Acting, Option B)
--------------------------------------------------------------
-
-This script:
- - Loads Heats_alpha_beta.csv
- - Simulates each prelim heat using a realistic NCAA-style stochastic model
- - Keeps Athlete ID and all fields
- - Saves simulated prelim results to resultsprelims.csv
-
-NO qualifiers are computed here.
-"""
-
 import random
 import pandas as pd
 

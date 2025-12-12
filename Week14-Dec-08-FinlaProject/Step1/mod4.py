@@ -62,4 +62,4 @@ df = df.sort_values(by=["Heat", "Lane"])
 # Step 7: Save result
 df.to_csv("Heats_hillclimb.csv", index=False)
 
-print("✅ Heats_hillclimb.csv created!")
+print(" Heats_hillclimb.csv created!")

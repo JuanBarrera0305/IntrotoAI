@@ -1,0 +1,33 @@
+Athlete ID ,Name            ,School                     ,SeedTime ,SimTime
+         1 ,Jacob Martinez  ,University of Pittsburgh   ,   10.33 , 10.41
+        26 ,Jacob Gonzalez  ,La Salle University        ,   10.61 , 10.432
+         2 ,Lucas Anderson  ,Lafayette College          ,   10.34 , 10.372
+        15 ,Brandon Rivera  ,Saint Joseph's University  ,   10.5  , 10.54
+         3 ,Carlos Smith    ,Villanova University       ,   10.35 , 10.365
+        16 ,Alex Martinez   ,Saint Joseph's University  ,   10.51 , 10.396
+        17 ,Ryan Brown      ,Duquesne University        ,   10.52 , 10.461
+         4 ,Noah Brown      ,Slippery Rock University   ,   10.35 , 10.5
+        18 ,Mateo Lee       ,Duquesne University        ,   10.53 , 10.322
+         5 ,Owen Martinez   ,Bucknell University        ,   10.38 , 10.382
+         7 ,Noah Smith      ,Lock Haven University      ,   10.39 , 10.373
+        33 ,Carlos Rivera   ,Slippery Rock University   ,   10.68 , 10.493
+        20 ,Owen Rivera     ,Slippery Rock University   ,   10.57 , 10.493
+        32 ,Owen Davis      ,Carnegie Mellon University ,   10.68 , 10.731
+         6 ,Ryan Garcia     ,Lock Haven University      ,   10.39 , 10.408
+        22 ,John Davis      ,Penn State University      ,   10.58 , 10.575
+         9 ,Carlos Johnson  ,West Chester University    ,   10.43 , 10.362
+        35 ,Chris Martinez  ,University of Pittsburgh   ,   10.7  , 10.615
+        10 ,Lucas Garcia    ,Lock Haven University      ,   10.46 , 10.392
+        21 ,Lucas Lopez     ,West Chester University    ,   10.58 , 10.464
+        11 ,Jacob Gonzalez  ,Villanova University       ,   10.47 , 10.482
+        24 ,Ethan Gonzalez  ,Saint Joseph's University  ,   10.59 , 10.626
+        12 ,Brandon Garcia  ,La Salle University        ,   10.48 , 10.457
+        25 ,Noah Flores     ,Lock Haven University      ,   10.59 , 10.577
+        28 ,Alex Anderson   ,Duquesne University        ,   10.61 , 10.415
+        13 ,Ryan Davis      ,Penn State University      ,   10.48 , 10.554
+        14 ,Brandon Johnson ,Bucknell University        ,   10.49 , 10.553
+        29 ,Ethan Garcia    ,La Salle University        ,   10.62 , 10.636
+        30 ,Lucas Garcia    ,Villanova University       ,   10.63 , 10.541
+        31 ,Brandon Perez   ,Saint Joseph's University  ,   10.64 , 10.632
+        45 ,Alex Rivera     ,Lafayette College          ,   10.81 , 10.659
+        23 ,Noah Rivera     ,West Chester University    ,   10.58 , 10.636

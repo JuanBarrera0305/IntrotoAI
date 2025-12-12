@@ -1,29 +1,3 @@
-"""
-CH.11 + CH.12 + CH.13 + CH.14 — Final Race Intelligence Pipeline
------------------------------------------------------------------
-
-Input:
-    Finalists_CH13_CH14.csv
-        Athlete ID, Name, School, SeedTime, SimTime, DisplayedSemiTime
-
-Steps:
-  • Chapter 12: Knowledge Representation on finalists
-      - SeedClass (Elite / Competitive / Borderline)
-      - StrongFinalistFinal, DarkHorseFinal using time-based logic
-
-  • Chapter 11: Planning Final Lanes
-      - STRIPS-style AssignLane(a, F1, lane)
-      - Center lanes first for strong finalists, then dark horses, then others
-
-  • Chapters 13 + 14: Monte Carlo final race simulation
-      - Uses DisplayedSemiTime as posterior mean (PostMean)
-      - Posterior predictive sampling for final times
-      - ProbGold, ProbMedal, PredictedFinalTime
-
-Output:
-    FinalRace_CH11_12_13_14.csv
-"""
-
 import math
 import random
 from collections import defaultdict
@@ -263,7 +237,7 @@ def plan_final_lanes(df: pd.DataFrame) -> Tuple[pd.DataFrame, List[Action], froz
 
 
 # =========================================================
-# CH.13 + CH.14 — Final Race Simulation (Your Logic)
+# CH.13 + CH.14 — Final Race Simulation
 # =========================================================
 
 def sample_final_time(mu: float, sigma: float) -> float:
@@ -346,14 +320,14 @@ def main():
         for fluent in sorted(list(final_state))[:30]:
             f.write(f"  {fluent}\n")
 
-    print(f"\n📝 Final lane plan written to {PLAN_LOG}")
+    print(f"\n Final lane plan written to {PLAN_LOG}")
 
     # 4) Chapters 13 + 14: posterior predictive simulation for final times
 
     # Posterior mean: DisplayedSemiTime (updated from semifinal)
     df_planned["PostMean"] = df_planned["DisplayedSemiTime"].astype(float)
 
-    # Posterior std (confidence) — constant for now, could be refined per athlete
+    # Posterior std (confidence)
     df_planned["PostStd"] = 0.05
 
     win_prob, medal_prob, pred_time = run_final_sim(df_planned, N_SIMS)
